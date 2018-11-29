@@ -11,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "circular-json": "^0.5.9",
+    "express": "^4.16.4",
+    "node-readability": "^3.0.0",
+    "sqlite3": "^4.0.4"
   }
 }
