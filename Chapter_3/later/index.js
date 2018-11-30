@@ -14,11 +14,28 @@ app.set('port', port);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+fs.exists('node_modules/bootstrap/dist/css/bootstrap.css', (exists) => {
+    console.log(exists);
+})
+
+app.use(
+    '/css/bootstrap.css',
+    express.static('node_modules/bootstrap/dist/css/bootstrap.css')
+  );
+
 app.get('/articles', (req, res, next) => {
 
     Article.all((err, articles) => {
         if (err) return next(err);
-        res.send(articles);
+        
+        res.format({
+            html: () => {
+                res.render('articles.ejs', { articles })
+            },
+            json: () => {
+                res.send(articles);
+            }
+        })
     })
 
 });
@@ -29,7 +46,6 @@ app.get('/articles/:id', (req, res, next) => {
 
     Article.find(id, (err, article) => {
         if (err) return next(err);
-        console.log(article);
         res.send(article);        
     })
     
@@ -44,15 +60,11 @@ app.post('/articles', (req, res, next) => {
         if (err || !result) 
             res.status(500).send('Error downloading article');
 
-
         Article.create(
           { title: result.title, content: result.content },
           (err, article) => {
             if (err) return next(err);
-            console.log(article);
             res.send('OK');
-
-            console.log('OK');
           }
         );
 
@@ -67,6 +79,7 @@ app.delete('/articles/:id', (req, res, next) => {
         if (err) return err;
         res.send({ message: 'Deleted' });
     })
+
 });
 
 app.listen(app.get('port'), () => {
