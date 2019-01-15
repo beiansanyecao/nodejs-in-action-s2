@@ -10,3 +10,5 @@ const server = http.createServer(function(req, res) {
 server.listen(port, () => {
     console.log('Server is listening on: http://localhost: %s', port);
 })
+
+console.log('test');
