@@ -1,12 +1,11 @@
 {
   "name": "es2015_example",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "./node_modules/.bin/babel browser.js -d build/",
-    "uglify": "./node_modules/.bin/uglifyjs build/browser.js -o build/browser.min.js",
+    "babel": "babel browser.js -d build/",
+    "uglify": "uglifyjs build/browser.js -o build/browser.min.js",
     "build": "npm run babel && npm run uglify"
   },
   "keywords": [],
@@ -16,5 +15,6 @@
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "uglify-es": "^3.3.9"
-  }
+  },
+  "description": ""
 }
